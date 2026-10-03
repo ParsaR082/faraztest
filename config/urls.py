@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import FileResponse, HttpResponse
+from django.views.generic import TemplateView
 from pathlib import Path
 
 from core.views import HomeView
@@ -22,19 +23,31 @@ def google_verification(request):
 def robots_txt(request):
     return HttpResponse(
         """User-agent: *
-Allow: /
+    Allow: /
 
-Disallow: /admin/
-Disallow: /media/
+    Disallow: /admin/
+    Disallow: /media/
 
-Sitemap: https://farazbamgostar.ir/sitemap.xml
-""",
+    Sitemap: https://farazbamgostar.ir/sitemap.xml
+    """,
         content_type="text/plain",
+    )
+def sitemap_xml(request):
+    return HttpResponse(
+            """<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        <url>
+            <loc>https://farazbamgostar.ir/</loc>
+        </url>
+        </urlset>
+        """,
+        content_type="application/xml",
     )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('robots.txt', robots_txt, name='robots-txt'),
+    path('sitemap.xml', sitemap_xml, name='sitemap-xml'),
     path('', HomeView.as_view(), name='home'),
 
     path(
