@@ -3,7 +3,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse
 from pathlib import Path
 
 from core.views import HomeView
@@ -19,9 +19,22 @@ def google_verification(request):
         content_type="text/html",
     )
 
+def robots_txt(request):
+    return HttpResponse(
+        """User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /media/
+
+Sitemap: https://farazbamgostar.ir/sitemap.xml
+""",
+        content_type="text/plain",
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('robots.txt', robots_txt, name='robots-txt'),
     path('', HomeView.as_view(), name='home'),
 
     path(
