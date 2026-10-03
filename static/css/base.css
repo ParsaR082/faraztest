@@ -1,0 +1,107 @@
+/* Base — reset, body, background, container */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  font-family: "DigiRastin", "Vazirmatn", Tahoma, sans-serif;
+  background-color: var(--surface-0);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+/* Page background — 70px gap, cover fills below, top of image preserved */
+.page-bg,
+.page-bg-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.page-bg img,
+.page-bg-wrapper img {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 70px);
+  object-fit: cover;
+  /* cover + center crops top & bottom; top keeps image head, crops excess at bottom only */
+  object-position: center top;
+  display: block;
+}
+
+.page-bg__scrim,
+.page-bg-wrapper::after {
+  content: "";
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  height: calc(100vh - 70px);
+  background: transparent;
+  pointer-events: none;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(100% - clamp(24px, 6vw, 48px), var(--container));
+  margin-inline: auto;
+  padding-inline: max(0px, env(safe-area-inset-left, 0px))
+    max(0px, env(safe-area-inset-right, 0px));
+}
+
+.container1 {
+  width: min(calc(100% - 32px), var(--container));
+  margin-inline: auto;
+}
+
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, var(--blue), var(--orange));
+  z-index: 1001;
+}

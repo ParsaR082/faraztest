@@ -1,0 +1,26 @@
+/* Utilities */
+.desktop-only {
+  display: flex;
+}
+
+@media (max-width: 860px) {
+  .desktop-only,
+  .nav-desktop-only {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

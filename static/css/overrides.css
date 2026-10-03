@@ -1,0 +1,80 @@
+/**
+ * Foundation overrides — loaded after legacy.css
+ * Ensures new design tokens win until sections are migrated.
+ */
+
+/* Background: 70px top gap + cover (anchor top, no top crop) */
+.page-bg-wrapper,
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+}
+
+.page-bg-wrapper img,
+.page-bg img {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 70px);
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Navbar: glassier orange */
+.site-header .header-shell {
+  background: rgba(255, 87, 34, 0.38);
+  backdrop-filter: blur(24px) saturate(1.45);
+  -webkit-backdrop-filter: blur(24px) saturate(1.45);
+  border-bottom-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.site-header.scrolled .header-shell {
+  background: rgba(255, 87, 34, 0.52);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* Compact sections — transparent, unified page-bg shows through */
+.section {
+  padding: var(--section-y) 0;
+  background: transparent;
+}
+
+#hero {
+  min-height: 92vh;
+  padding-top: calc(var(--nav-height) + 24px);
+  padding-bottom: 32px;
+}
+
+/* F10: legacy hero grid neutralized — glass styles in sections/hero.css */
+#hero.section-hero {
+  background: none !important;
+  background-attachment: scroll !important;
+}
+
+#hero.section-hero .hero-grid {
+  display: flex;
+  grid-template-columns: unset;
+}
+
+.section-header {
+  margin-bottom: 28px;
+}
+
+.section-title {
+  color: var(--text-primary);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+.section-desc {
+  color: var(--text-secondary);
+}
+
+/* Particle layer — subtle (see chrome.css) */
+
+/* Lighter surfaces on legacy blueprint cards */
+.blueprint-card {
+  background-color: var(--surface-1);
+}

@@ -1,0 +1,123 @@
+/* Components — buttons, glass, images, badges */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 87, 34, 0.3);
+  background: var(--orange-glass);
+  border-radius: var(--radius-sm);
+  color: var(--orange-soft);
+  font-size: var(--font-caption);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
+}
+
+.glass,
+.glass-panel {
+  background: var(--surface-glass);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.glass-card {
+  border-radius: var(--radius-md);
+  padding: var(--card-pad);
+  transition: transform var(--dur-med) var(--ease-out),
+    border-color var(--dur-fast) ease,
+    box-shadow var(--dur-med) ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 87, 34, 0.28);
+  box-shadow: 0 12px 40px rgba(255, 87, 34, 0.12);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease,
+    background var(--dur-fast) ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--orange), var(--orange-glow));
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(255, 87, 34, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 87, 34, 0.4);
+}
+
+.btn-secondary {
+  color: var(--text-primary);
+  background: var(--surface-glass);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-glass-strong);
+}
+
+.img-frame {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.img-frame:hover img {
+  transform: scale(1.05);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge-orange {
+  background: rgba(255, 87, 34, 0.85);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge-glass {
+  background: var(--surface-glass);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}

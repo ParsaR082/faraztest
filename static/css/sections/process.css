@@ -1,0 +1,213 @@
+/* F23 — Process: horizontal timeline RTL + mobile accordion */
+
+#process.section-process {
+  overflow: hidden;
+}
+
+#process.section-process .process-site-board {
+  position: relative;
+  padding-top: 8px;
+}
+
+#process.section-process .process-accordion {
+  display: none;
+}
+
+#process.section-process .process-connector-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#process.section-process .process-connector-path {
+  stroke: rgba(255, 140, 100, 0.55);
+  stroke-width: 2;
+  stroke-dasharray: 8 6;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+#process.section-process .process-node-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(8px, 1.5vw, 14px);
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+}
+
+#process.section-process .process-node-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+#process.section-process .process-node-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255, 140, 100, 0.45);
+  background: transparent;
+  color: var(--text-muted);
+  transition:
+    background var(--dur-med) ease,
+    border-color var(--dur-med) ease,
+    color var(--dur-med) ease,
+    box-shadow var(--dur-med) ease;
+}
+
+#process.section-process .process-node-num {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+#process.section-process .process-node-item.is-active .process-node-circle {
+  background: linear-gradient(145deg, var(--orange), var(--blue-light));
+  border-color: var(--orange-glow);
+  color: #fff;
+  box-shadow: 0 0 0 5px rgba(255, 87, 34, 0.14);
+}
+
+#process.section-process .process-node-panel {
+  padding: 14px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 87, 34, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 140, 100, 0.22);
+  width: 100%;
+  min-height: 110px;
+  opacity: 0.75;
+  transition: opacity var(--dur-med) ease, border-color var(--dur-med) ease;
+}
+
+#process.section-process .process-node-item.is-active .process-node-panel {
+  opacity: 1;
+  border-color: rgba(255, 140, 100, 0.4);
+  background: rgba(255, 87, 34, 0.2);
+}
+
+#process.section-process .process-node-panel h3 {
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+#process.section-process .process-node-panel p {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+#process.section-process .process-site-board.is-visible .process-connector-path {
+  transition: stroke-dashoffset 1.5s linear;
+}
+
+#process.section-process .process-acc-item {
+  border: 1px solid rgba(255, 140, 100, 0.22);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 87, 34, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+#process.section-process .process-acc-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+#process.section-process .process-acc-summary::-webkit-details-marker {
+  display: none;
+}
+
+#process.section-process .process-acc-summary::after {
+  content: "+";
+  margin-inline-start: auto;
+  color: var(--orange-soft);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+#process.section-process .process-acc-item[open] .process-acc-summary::after {
+  content: "−";
+}
+
+#process.section-process .process-acc-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border: 2px solid rgba(255, 140, 100, 0.4);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+#process.section-process .process-acc-item[open] .process-acc-num {
+  background: var(--orange);
+  border-color: var(--orange-glow);
+  color: #fff;
+}
+
+#process.section-process .process-acc-body {
+  padding: 0 16px 14px 62px;
+  color: var(--text-muted);
+  font-size: var(--font-caption);
+  line-height: 1.7;
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  #process.section-process .process-node-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 14px;
+  }
+
+  #process.section-process .process-connector-svg {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  #process.section-process .process-site-board {
+    display: none;
+  }
+
+  #process.section-process .process-accordion {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  #process.section-process .process-accordion {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #process.section-process .process-site-board.is-visible .process-connector-path {
+    transition: none;
+  }
+}

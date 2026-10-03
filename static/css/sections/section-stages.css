@@ -1,0 +1,242 @@
+/* Section readability — varied glass layers (not one repeated panel) */
+
+/* ── Base: blurry plate behind section titles ── */
+.section-header {
+  position: relative;
+  padding: clamp(16px, 2.5vw, 22px) clamp(20px, 3vw, 28px);
+  border-radius: var(--radius-lg);
+  background: rgba(15, 23, 42, 0.48);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
+}
+
+.section-header .section-title,
+.section-header .section-desc {
+  text-shadow: none;
+}
+
+/* ── Stats: compact glass on intro copy only ── */
+#stats.section-stats .stats-intro {
+  padding: clamp(18px, 3vw, 24px);
+  border-radius: var(--radius-lg);
+  background: rgba(26, 54, 93, 0.48);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
+}
+
+#stats.section-stats .stats-intro .section-title,
+#stats.section-stats .stats-intro .section-desc {
+  text-shadow: none;
+}
+
+/* ── Products: warm frosted wrap (no blueprint) ── */
+#products.section-products .container {
+  padding: clamp(22px, 3.5vw, 32px);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 87, 34, 0.14) 0%,
+    rgba(26, 54, 93, 0.32) 100%
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 140, 100, 0.2);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.14);
+}
+
+/* ── Team: soft ambient band behind content ── */
+#team.section-team {
+  position: relative;
+  isolation: isolate;
+}
+
+#team.section-team::before {
+  content: "";
+  position: absolute;
+  inset: 8% 4%;
+  z-index: -1;
+  border-radius: var(--radius-xl);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(26, 54, 93, 0.42) 0%,
+    rgba(26, 54, 93, 0.18) 55%,
+    transparent 80%
+  );
+  pointer-events: none;
+}
+
+#team.section-team .section-header {
+  max-width: 640px;
+  margin-inline: auto;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Videos: header + glass frame around showcase ── */
+#videos.section-videos .section-header {
+  margin-bottom: clamp(20px, 3vw, 28px);
+}
+
+#videos.section-videos .video-showcase {
+  padding: clamp(16px, 2.5vw, 22px);
+  border-radius: var(--radius-xl);
+  background: rgba(26, 54, 93, 0.45);
+  backdrop-filter: blur(20px) saturate(1.25);
+  -webkit-backdrop-filter: blur(20px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255, 87, 34, 0.08);
+}
+
+/* ── Features: header capsule only ── */
+#features.section-features .section-header {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: rgba(255, 87, 34, 0.16);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 140, 100, 0.28);
+  box-shadow: 0 8px 28px rgba(255, 87, 34, 0.1);
+}
+
+#features.section-features .container {
+  text-align: center;
+}
+
+#features.section-features .feature-card {
+  background: rgba(255, 255, 255, 0.11);
+}
+
+/* ── Services: left accent rail on container ── */
+#services.section-services .container {
+  position: relative;
+  padding: clamp(22px, 3vw, 30px);
+  padding-inline-start: clamp(28px, 4vw, 36px);
+  border-radius: var(--radius-lg);
+  background: rgba(15, 23, 42, 0.38);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.15);
+}
+
+#services.section-services .container::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  inset-inline-start: 14px;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--orange), var(--blue-light));
+  pointer-events: none;
+}
+
+/* ── Process: dashed engineering tray ── */
+#process.section-process .container {
+  padding: clamp(20px, 3vw, 28px);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 87, 34, 0.1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px dashed rgba(255, 140, 100, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+#process.section-process .process-node-panel {
+  background: rgba(15, 23, 42, 0.42);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+#process.section-process .process-node-item.is-active .process-node-panel {
+  background: rgba(255, 87, 34, 0.24);
+}
+
+/* ── Gallery: header + frosted plate under bento ── */
+#gallery.section-gallery .section-header {
+  margin-bottom: clamp(20px, 3vw, 28px);
+}
+
+#gallery.section-gallery .gallery-bento {
+  padding: clamp(14px, 2vw, 18px);
+  border-radius: var(--radius-xl);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.16);
+}
+
+/* ── FAQ: header + neutral frosted column ── */
+#faq.section-faq .section-header {
+  margin-bottom: clamp(20px, 3vw, 28px);
+}
+
+#faq.section-faq .faq-wrap {
+  padding: clamp(16px, 2.5vw, 22px);
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+}
+
+#faq.section-faq .faq-item {
+  background: rgba(15, 23, 42, 0.35);
+}
+
+/* ── Contact: stronger existing panels ── */
+#contact.section-contact .contact-info,
+#contact.section-contact .form-box {
+  background: rgba(26, 54, 93, 0.5);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.16);
+}
+
+/* ── Anatomy: title block on transparent scroll section ── */
+#anatomy .anatomy-copy {
+  padding: clamp(18px, 3vw, 24px);
+  border-radius: var(--radius-lg);
+  background: rgba(15, 23, 42, 0.46);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
+}
+
+#anatomy .anatomy-copy .section-title,
+#anatomy .anatomy-copy .section-desc {
+  text-shadow: none;
+}
+
+@media (max-width: 992px) {
+  #products.section-products .container,
+  #services.section-services .container,
+  #process.section-process .container {
+    padding: 20px;
+  }
+
+  #features.section-features .section-header {
+    border-radius: var(--radius-lg);
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  #team.section-team::before {
+    inset: 4% 2%;
+  }
+}

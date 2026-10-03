@@ -1,0 +1,676 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+{% load core_filters %}
+
+<div class="global-background-effects">
+    <canvas id="bg-canvas"></canvas>
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero" class="section-hero">
+    <div class="container hero-grid">
+        <div class="hero-copy hero-glass reveal">
+            <div class="eyebrow">{{ site_settings.hero_eyebrow }}</div>
+            <h1>
+                {{ site_settings.hero_brand_name }}
+                <span class="grad">{{ site_settings.hero_title }}</span>
+                {{ site_settings.hero_subtitle }}
+            </h1>
+            <p>
+                {{ site_settings.hero_description }}
+            </p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary interactable" id="mag-btn">
+                    {{ site_settings.hero_cta_primary_text }}
+                </a>
+                <a href="#projects" class="btn btn-secondary interactable">
+                    {{ site_settings.hero_cta_secondary_text }}
+                </a>
+            </div>
+            <div class="hero-trust">
+                <div class="trust-chip">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2L4 5v6c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V5l-8-3z" stroke="currentColor" stroke-width="1.8" />
+                    </svg>
+                    {{ site_settings.trust_chip_1 }}
+                </div>
+                <div class="trust-chip">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M12 3v18M6 9l6-6 6 6" stroke="currentColor" stroke-width="1.8" />
+                    </svg>
+                    {{ site_settings.trust_chip_2 }}
+                </div>
+                <div class="trust-chip">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 12h16M12 4v16" stroke="currentColor" stroke-width="1.8" />
+                    </svg>
+                    {{ site_settings.trust_chip_3 }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+        <span>اسکرول کنید</span>
+        <div class="wheel"></div>
+    </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section id="stats" class="section section-stats" dir="rtl">
+    <div class="container stats-layout">
+        <div class="stats-intro reveal">
+            <div class="eyebrow">{{ site_settings.stats_eyebrow }}</div>
+            <h2 class="section-title">{{ site_settings.stats_title }}</h2>
+            <p class="section-desc">{{ site_settings.stats_desc }}</p>
+        </div>
+        <div class="stats-wrap">
+            {% for stat in stats %}
+            <div class="stat-card reveal">
+                <div class="stat-thumb">
+                    {% if stat.cover_image %}
+                    <img src="{{ stat.cover_image.url }}" alt="{{ stat.label }}" loading="lazy" />
+                    {% else %}
+                    <img src="{% static 'img/factory_farazbam.webp' %}" alt="{{ stat.label }}" loading="lazy" />
+                    {% endif %}
+                </div>
+                <div class="stat-body">
+                    <div class="stat-num" data-count="{{ stat.number }}">0</div>
+                    <div class="stat-label">{{ stat.label }}</div>
+                    <div class="stat-progress" aria-hidden="true">
+                        <div class="stat-progress-track">
+                            <div class="stat-progress-fill" data-progress="{% if stat.number <= 100 %}{{ stat.number }}{% else %}90{% endif %}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section id="products" class="section section-products">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="eyebrow">{{ site_settings.products_eyebrow }}</div>
+            <h2 class="section-title">{{ site_settings.products_title }}</h2>
+            <p class="section-desc">{{ site_settings.products_desc }}</p>
+        </div>
+        <div class="products-grid">
+            {% for product in products %}
+            <article class="product-card reveal">
+                <div class="product-media">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy" />
+                    {% else %}
+                    <div class="product-placeholder">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 2L4 6v6c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V6l-8-4z" stroke="currentColor" stroke-width="1.8" />
+                        </svg>
+                    </div>
+                    {% endif %}
+                    {% if product.is_featured %}
+                    <div class="product-badge">ویژه</div>
+                    {% endif %}
+                </div>
+                <div class="product-body">
+                    <h3>{{ product.name }}</h3>
+                    <p class="product-description">{{ product.description }}</p>
+                    {% if product.features_list %}
+                    <div class="product-features">
+                        {% for feature in product.features_list %}
+                        <span class="feature-tag">{{ feature }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="product-specs">
+                        {% if product.thickness %}
+                        <div class="spec-item">
+                            <span class="spec-label">ضخامت:</span>
+                            <span class="spec-value">{{ product.thickness }}</span>
+                        </div>
+                        {% endif %}
+                        {% if product.weight %}
+                        <div class="spec-item">
+                            <span class="spec-label">وزن:</span>
+                            <span class="spec-value">{{ product.weight }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section section-about">
+    <div class="container">
+        <div class="about-showcase reveal">
+            <div class="about-media">
+                <div class="about-img-frame">
+                    {% if site_settings.about_image %}
+                    <img src="{{ site_settings.about_image.url }}" alt="کارخانه فراز بام" loading="lazy" />
+                    {% else %}
+                    <img src="{% static 'img/factory_farazbam.webp' %}" alt="کارخانه فراز بام" loading="lazy" />
+                    {% endif %}
+                    <div class="about-img-badge">
+                        <span class="about-badge-num">{{ site_settings.about_badge_num }}</span>
+                        <span class="about-badge-label">{{ site_settings.about_badge_label }}</span>
+                    </div>
+                </div>
+                <div class="about-mini-stats">
+                    <div class="about-mini-stat">
+                        <strong>{{ site_settings.about_stat_1_value }}</strong>
+                        <span>{{ site_settings.about_stat_1_label }}</span>
+                    </div>
+                    <div class="about-mini-stat">
+                        <strong>{{ site_settings.about_stat_2_value }}</strong>
+                        <span>{{ site_settings.about_stat_2_label }}</span>
+                    </div>
+                    <div class="about-mini-stat">
+                        <strong>{{ site_settings.about_stat_3_value }}</strong>
+                        <span>{{ site_settings.about_stat_3_label }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-content">
+                <div class="eyebrow">{{ site_settings.about_eyebrow }}</div>
+                <h2 class="section-title about-heading">
+                    {{ site_settings.about_title }}
+                </h2>
+                <p class="about-lead">{{ site_settings.about_text1 }}</p>
+                <p class="about-text">{{ site_settings.about_text2 }}</p>
+                <div class="about-features">
+                    {% for bullet in about_bullets %}
+                    <div class="about-feature">
+                        <div class="about-feature-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 2L4 6v6c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V6l-8-4z" stroke="currentColor" stroke-width="1.8"/></svg>
+                        </div>
+                        <div>
+                            <strong>{{ bullet.title }}</strong>
+                            <span>{{ bullet.text }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a href="#contact" class="btn btn-primary interactable about-cta">درخواست مشاوره رایگان</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TEAM ===== -->
+<section id="team" class="section section-team">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="eyebrow">{{ site_settings.team_eyebrow }}</div>
+            <h2 class="section-title">{{ site_settings.team_title }}</h2>
+            <p class="section-desc">{{ site_settings.team_desc }}</p>
+        </div>
+        <div class="team-grid">
+            {% for member in team_members %}
+            <article class="team-card reveal">
+                <div class="team-photo">
+                    {% if member.photo %}
+                    <img src="{{ member.photo.url }}" alt="{{ member.name }}" loading="lazy" />
+                    {% else %}
+                    <div class="team-photo-placeholder">
+                        <span>{{ member.name|slice:":1" }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                <h3>{{ member.name }}</h3>
+                <p class="team-role">{{ member.role }}</p>
+                {% if member.bio %}
+                <p class="team-bio">{{ member.bio }}</p>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== VIDEOS ===== -->
+<section id="videos" class="section section-videos">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="eyebrow">{{ site_settings.videos_eyebrow }}</div>
+            <h2 class="section-title">{{ site_settings.videos_title }}</h2>
+            <p class="section-desc">{{ site_settings.videos_desc }}</p>
+        </div>
+        <div class="video-showcase reveal">
+            <div class="video-player-wrap" id="videoPlayerWrap">
+                {% with featured_video=video_items.first %}
+                {% if featured_video and featured_video.video_url %}
+                <div class="video-player" id="mainVideoPlayer"
+                    data-video="{{ featured_video.video_url }}"
+                    data-title="{{ featured_video.title }}"
+                    data-caption="{{ featured_video.caption }}">
+                    <img class="video-poster" src="{{ featured_video.image.url }}" alt="{{ featured_video.title }}" loading="lazy" />
+                    <button class="video-play-btn interactable" aria-label="پخش ویدیو">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <div class="video-player-info">
+                        <h3>{{ featured_video.title }}</h3>
+                        {% if featured_video.caption %}<p>{{ featured_video.caption }}</p>{% endif %}
+                    </div>
+                </div>
+                {% else %}
+                <div class="video-player video-player--placeholder" id="mainVideoPlayer">
+                    <img class="video-poster" src="{% static 'img/factory_farazbam.webp' %}" alt="کارخانه فراز بام" loading="lazy" />
+                    <button class="video-play-btn interactable" aria-label="پخش ویدیو">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <div class="video-player-info">
+                        <h3>تور مجازی کارخانه فراز بام</h3>
+                        <p>نگاهی به خط تولید، آزمایشگاه QC و فرآیند بسته‌بندی ایزوگام</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="video-list">
+                {% for video in video_items %}
+                <button class="video-thumb interactable reveal {% if forloop.first %}active{% endif %}"
+                    data-video="{{ video.video_url }}"
+                    data-poster="{{ video.image.url }}"
+                    data-title="{{ video.title }}"
+                    data-caption="{{ video.caption }}">
+                    <div class="video-thumb-img">
+                        <img src="{{ video.image.url }}" alt="{{ video.title }}" loading="lazy" />
+                        <span class="video-thumb-play">▶</span>
+                    </div>
+                    <div class="video-thumb-text">
+                        <strong>{{ video.title }}</strong>
+                        {% if video.caption %}<span>{{ video.caption|truncatechars:60 }}</span>{% endif %}
+                    </div>
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section id="features" class="section section-features">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="eyebrow">{{ site_settings.features_eyebrow }}</div>
+            <h2 class="section-title">{{ site_settings.features_title }}</h2>
+            <p class="section-desc">{{ site_settings.features_desc }}</p>
+        </div>
+        <div class="features-grid">
+            {% for feature in features %}
+            <div class="feature-card interactable reveal">
+                <div class="icon-wrapper">
+                    {{ feature.svg_icon|safe }}
+                </div>
+                <h3>{{ feature.title }}</h3>
+                <p>{{ feature.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services" class="section section-services">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="eyebrow">{{ site_settings.services_eyebrow }}</div>
+            <h2 class="section-title">{{ site_settings.services_title }}</h2>
+            <p class="section-desc">{{ site_settings.services_desc }}</p>
+        </div>
+        <div class="services-grid">
+            {% for service in services %}
+            <article class="service-card reveal">
+                <div class="service-index">{{ service.index }}</div>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+                <ul>
+                    {% for item in service.items.all %}
+                    <li>{{ item.text }}</li>
+                    {% endfor %}
+                </ul>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== ANATOMY ===== -->
+<section id="anatomy">
+  <div class="sticky-wrapper">
+    <div class="anatomy-layout">
+      <div class="anatomy-copy reveal">
+        <div class="eyebrow">{{ site_settings.anatomy_eyebrow }}</div>
+        <h2 class="section-title">{{ site_settings.anatomy_title }}</h2>
+        <p class="section-desc">{{ site_settings.anatomy_desc }}</p>
+        <div class="anatomy-hints">
+          <div class="hint">
+            <b>۱</b><span>{{ site_settings.anatomy_hint_1 }}</span>
+          </div>
+          <div class="hint">
+            <b>۲</b><span>{{ site_settings.anatomy_hint_2 }}</span>
+          </div>
+          <div class="hint">
+            <b>۳</b><span>{{ site_settings.anatomy_hint_3 }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene-shell reveal desktop-only">
+        <div class="scene-3d" id="scene-3d">
+          {% for layer in anatomy_layers %}
+          <div
+            class="layer {{ layer.css_class }} interactable"
+            data-depth="{{ layer.animation_depth }}"
+            data-info="{{ layer.info_id }}"
+          >
+            <span>{{ layer.name }}</span>
+          </div>
+          {% empty %}
+          <div class="layer layer-1 interactable" data-depth="250" data-info="1">
+            <span>فویل آلومینیوم</span>
+          </div>
+          <div class="layer layer-2 interactable" data-depth="100" data-info="2">
+            <span>قیر پلیمری BPP</span>
+          </div>
+          <div class="layer layer-3 interactable" data-depth="-50" data-info="3">
+            <span>تیشو و پلی‌استر</span>
+          </div>
+          <div class="layer layer-4 interactable" data-depth="-200" data-info="4">
+            <span>لایه اتصال نهایی</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% for layer in anatomy_layers %}
+  <div class="layer-info-2d" id="info-{{ layer.info_id }}">
+    <strong>{{ layer.name }}</strong>
+    {{ layer.info_text }}
+  </div>
+  {% empty %}
+  <div class="layer-info-2d" id="info-1">
+    <strong>فویل آلومینیوم</strong>
+    بازتاب بخش زیادی از تابش خورشید و محافظت از لایه‌های زیرین در برابر اشعه UV و فرسایش ناشی از حرارت.
+  </div>
+  <div class="layer-info-2d" id="info-2">
+    <strong>قیر پلیمری BPP</strong>
+    هسته اصلی عایق با نقش کلیدی در آب‌بندی، مقاومت محیطی و پایداری عملکرد در شرایط مختلف آب‌وهوایی.
+  </div>
+  <div class="layer-info-2d" id="info-3">
+    <strong>تیشو و پلی‌استر</strong>
+    تأمین استحکام کششی، افزایش مقاومت در برابر پارگی و کمک به حفظ یکپارچگی ساختار عایق.
+  </div>
+  <div class="layer-info-2d" id="info-4">
+    <strong>لایه اتصال نهایی</strong>
+    ایجاد چسبندگی مطمئن به بستر و تکمیل فرآیند آب‌بندی با اتصال استاندارد به سطح زیرکار.
+  </div>
+  {% endfor %}
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section id="process" class="section section-process" dir="rtl">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="eyebrow">{{ site_settings.process_eyebrow }}</div>
+            <h2 class="section-title">{{ site_settings.process_title }}</h2>
+            <p class="section-desc">{{ site_settings.process_desc }}</p>
+        </div>
+        <!-- Desktop / Tablet: Site Timeline -->
+        <div class="process-site-board" id="processBoard" aria-label="فرآیند همکاری — تایم‌لاین">
+            <svg class="process-connector-svg" aria-hidden="true" viewBox="0 0 1000 56" preserveAspectRatio="none">
+                <line class="process-connector-path" x1="980" y1="28" x2="20" y2="28" />
+            </svg>
+            <ol class="process-node-list">
+                {% for step in process_steps %}
+                <li class="process-node-item" data-step="{{ forloop.counter }}">
+                    <div class="process-node-marker" aria-hidden="true">
+                        <span class="process-node-circle"><span class="process-node-num">{{ forloop.counter|persian_num }}</span></span>
+                    </div>
+                    <div class="process-node-panel">
+                        <h3>{{ step.title }}</h3>
+                        <p>{{ step.description }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+        <!-- Mobile: Accordion Stepper -->
+        <div class="process-accordion" id="processAccordion" aria-label="فرآیند همکاری — گام‌به‌گام">
+            {% for step in process_steps %}
+            <details class="process-acc-item" {% if forloop.first %}open{% endif %}>
+                <summary class="process-acc-summary">
+                    <span class="process-acc-num">{{ forloop.counter|persian_num }}</span>
+                    <span class="process-acc-title">{{ step.title }}</span>
+                </summary>
+                <div class="process-acc-body">
+                    <p>{{ step.description }}</p>
+                </div>
+            </details>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects" class="section section-projects" dir="rtl">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="eyebrow">{{ site_settings.projects_eyebrow }}</div>
+            <h2 class="section-title">{{ site_settings.projects_title }}</h2>
+            <p class="section-desc">{{ site_settings.projects_desc }}</p>
+        </div>
+        <div class="projects-grid">
+            {% for project in projects %}
+            <article class="project-card reveal">
+                <div class="project-image">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" />
+                    {% else %}
+                    <img src="{% static 'img/stat-projects.jpg' %}" alt="{{ project.title }}" loading="lazy" onerror="this.src='{% static 'img/factory_farazbam.webp' %}'" />
+                    {% endif %}
+                    <div class="project-image-overlay" aria-hidden="true"></div>
+                    <span class="project-type-badge">{{ project.project_type }}</span>
+                </div>
+                <div class="project-body">
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.description }}</p>
+                    <div class="project-meta">
+                        <div class="project-meta-item">
+                            <span class="project-meta-label">سطح اجرا</span>
+                            <span class="project-meta-value">{{ project.surface_type|default:"—" }}</span>
+                        </div>
+                        <div class="project-meta-item">
+                            <span class="project-meta-label">وضعیت</span>
+                            <span class="project-meta-value">{{ project.get_status_display }}</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+
+<!-- Lightbox -->
+<div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
+    <button class="lightbox-close interactable" id="lightboxClose" aria-label="بستن">✕</button>
+    <div class="lightbox-content" id="lightboxContent"></div>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- ===== CTA BANNER ===== -->
+<section id="cta" class="section section-cta"{% if site_settings.cta_background_image %} style="--cta-bg: url('{{ site_settings.cta_background_image.url }}')"{% endif %}>
+    <div class="container">
+        <div class="cta-banner reveal">
+            <div>
+                <h3>{{ site_settings.cta_title }}</h3>
+                <p>{{ site_settings.cta_desc }}</p>
+            </div>
+            <div class="cta-actions">
+                <a href="#contact" class="btn btn-primary interactable">{{ site_settings.cta_btn_primary }}</a>
+                <a href="tel:{{ site_settings.phone_direct }}" class="btn btn-secondary interactable">{{ site_settings.cta_btn_secondary }}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="section section-faq">
+    <div class="container">
+        <div class="section-header reveal">
+            <div class="eyebrow">{{ site_settings.faq_eyebrow }}</div>
+            <h2 class="section-title">{{ site_settings.faq_title }}</h2>
+            <p class="section-desc">{{ site_settings.faq_desc }}</p>
+        </div>
+        <div class="faq-wrap">
+            {% for faq in faqs %}
+            <div class="faq-item">
+                <button type="button" class="faq-q">
+                    <span>{{ faq.question }}</span>
+                    <div class="faq-icon">+</div>
+                </button>
+                <div class="faq-a">
+                    <div class="faq-a-inner">{{ faq.answer }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="section section-contact">
+    <div class="container1 contact-grid">
+        <div class="contact-info reveal">
+            <div class="eyebrow">{{ site_settings.contact_eyebrow }}</div>
+            <h3>{{ site_settings.contact_title }}</h3>
+            <p>{{ site_settings.contact_desc }}</p>
+            <h4>{{ site_settings.contact_info_title }}</h4>
+            <p>{{ site_settings.contact_info_text }}</p>
+            <div class="contact-list">
+                <div class="contact-item">
+                    <div class="icon">☎</div>
+                    <div>
+                        <strong>تماس مستقیم</strong>
+                        <span>{{ site_settings.phone_direct }}</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">⌂</div>
+                    <div>
+                        <strong>حوزه فعالیت</strong>
+                        <span>{{ site_settings.activity_area }}</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">⏱</div>
+                    <div>
+                        <strong>پاسخگویی</strong>
+                        <span>{{ site_settings.response_time }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="map-mock">
+                <div class="map-pin"></div>
+            </div>
+        </div>
+        <div class="form-box reveal">
+            <h3>{{ site_settings.contact_form_title }}</h3>
+            <p>{{ site_settings.contact_form_desc }}</p>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="form-message {% if 'success' in message.tags %}form-message--success{% else %}form-message--error{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form id="contactForm" method="post">
+                {% csrf_token %}
+                <div class="form-grid">
+                    <div class="input-wrap">
+                        <input type="text" id="id_full_name" name="full_name"
+                            value="{{ contact_form.full_name.value|default:'' }}"
+                            required class="interactable" />
+                        <label for="id_full_name">نام و نام خانوادگی</label>
+                        {% if contact_form.full_name.errors %}
+                        <div class="field-error">{{ contact_form.full_name.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="input-wrap">
+                        <input type="tel" id="id_phone" name="phone"
+                            value="{{ contact_form.phone.value|default:'' }}"
+                            required class="interactable" />
+                        <label for="id_phone">شماره تماس</label>
+                        {% if contact_form.phone.errors %}
+                        <div class="field-error">{{ contact_form.phone.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="input-wrap">
+                        <input type="text" id="id_city" name="city"
+                            value="{{ contact_form.city.value|default:'' }}"
+                            required class="interactable" />
+                        <label for="id_city">شهر / منطقه پروژه</label>
+                        {% if contact_form.city.errors %}
+                        <div class="field-error">{{ contact_form.city.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="input-wrap">
+                        <select id="id_project_type" name="project_type" required class="interactable">
+                            <option value="" selected disabled hidden></option>
+                            {% if contact_form.project_type.field.choices %}
+                                {% for val, label in contact_form.project_type.field.choices %}
+                                <option value="{{ val }}" {% if contact_form.project_type.value == val %}selected{% endif %}>{{ label }}</option>
+                                {% endfor %}
+                            {% else %}
+                            <option>پشت‌بام مسکونی</option>
+                            <option>فضای تجاری</option>
+                            <option>سوله یا فضای صنعتی</option>
+                            <option>سرویس و فضای مرطوب</option>
+                            <option>سایر</option>
+                            {% endif %}
+                        </select>
+                        <label for="id_project_type">نوع پروژه</label>
+                        {% if contact_form.project_type.errors %}
+                        <div class="field-error">{{ contact_form.project_type.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="input-wrap full">
+                        <textarea id="id_message" name="message"
+                            required class="interactable">{{ contact_form.message.value|default:'' }}</textarea>
+                        <label for="id_message">توضیح کوتاه درباره وضعیت پروژه</label>
+                        {% if contact_form.message.errors %}
+                        <div class="field-error">{{ contact_form.message.errors|join:", " }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-submit interactable" id="submitBtn">
+                        ثبت درخواست فوری
+                    </button>
+                    <a href="tel:{{ site_settings.phone_direct }}" class="btn btn-secondary interactable">تماس مستقیم</a>
+                </div>
+                <div class="form-note">
+                    با ثبت این فرم، اطلاعات شما فقط برای هماهنگی و پاسخگویی به درخواست پروژه استفاده خواهد شد.
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

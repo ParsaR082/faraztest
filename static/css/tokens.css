@@ -1,0 +1,101 @@
+/* Design Tokens — فراز بام Front Rebuild */
+@font-face {
+  font-family: 'DigiRastin';
+  src: url('/static/fonts/DigiRastinPlusCircle.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Brand */
+  --orange: #ff5722;
+  --orange-glow: #ff784e;
+  --orange-soft: #ff8d68;
+  --orange-glass: rgba(255, 87, 34, 0.22);
+
+  --blue: #1a365d;
+  --blue-light: #2c5282;
+  --blue-soft: #3a6aa3;
+  --blue-glass: rgba(26, 54, 93, 0.35);
+
+  /* Surfaces — lighter */
+  --surface-0: #2a3f56;
+  --surface-1: rgba(42, 58, 78, 0.72);
+  --surface-2: rgba(52, 70, 92, 0.82);
+  --surface-glass: rgba(255, 255, 255, 0.1);
+  --surface-glass-strong: rgba(255, 255, 255, 0.16);
+
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #94a3b8;
+
+  /* Scrim */
+  --scrim-light: rgba(15, 23, 42, 0.45);
+  --scrim-medium: rgba(15, 23, 42, 0.58);
+  --scrim-heavy: rgba(15, 23, 42, 0.72);
+
+  /* Legacy aliases (compat) */
+  --white: var(--text-primary);
+  --slate-100: var(--text-secondary);
+  --slate-200: #cbd5e1;
+  --slate-300: var(--text-muted);
+  --slate-400: #64748b;
+  --dark: #1e293b;
+  --dark-2: #334155;
+  --dark-3: var(--surface-0);
+  --glass-bg: var(--surface-glass);
+  --glass-bg-strong: var(--surface-glass-strong);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --success: #10b981;
+  --danger: #ef4444;
+  --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.22);
+
+  /* Layout */
+  --container: 1280px;
+  --nav-height: 72px;
+  --section-y: clamp(48px, 7vh, 72px);
+  --section-gap: clamp(16px, 2.5vw, 24px);
+  --card-pad: clamp(16px, 2.5vw, 24px);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Blueprint (stats/projects) */
+  --blueprint-surface: rgba(52, 70, 92, 0.82);
+  --blueprint-pattern:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.04) 0 1px,
+      transparent 1px 22px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0 1px,
+      transparent 1px 22px
+    );
+
+  /* Typography */
+  --font-display: clamp(2rem, 5vw, 3.2rem);
+  --font-h2: clamp(1.4rem, 2.8vw, 2rem);
+  --font-h3: clamp(1.05rem, 1.8vw, 1.25rem);
+  --font-body: 0.92rem;
+  --font-caption: 0.82rem;
+  --font-stat: clamp(1.8rem, 3.5vw, 2.4rem);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.25s;
+  --dur-med: 0.45s;
+}
+
+@media (max-width: 480px) {
+  :root {
+    --nav-height: 72px;
+  }
+}

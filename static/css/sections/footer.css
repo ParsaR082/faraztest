@@ -1,0 +1,146 @@
+/* F32 — Footer polish */
+
+.site-footer {
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: clamp(20px, 3vw, 28px) 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.55) 0%,
+    rgba(15, 23, 42, 0.88) 100%
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 87, 34, 0.45),
+    transparent
+  );
+}
+
+.site-footer .footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.site-footer .footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-footer .footer-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.site-footer .footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.site-footer .footer-brand-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.site-footer .footer-brand-tag {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.site-footer .footer-copy {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  margin: 0;
+}
+
+.site-footer .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.site-footer .footer-links a {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  transition: color var(--dur-fast) ease;
+}
+
+.site-footer .footer-links a:hover {
+  color: var(--orange-soft);
+}
+
+.to-top {
+  position: fixed;
+  inset-inline-start: 20px;
+  bottom: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  display: grid;
+  place-items: center;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity var(--dur-med) ease,
+    visibility var(--dur-med) ease,
+    transform var(--dur-med) ease,
+    border-color var(--dur-fast) ease;
+  box-shadow: var(--shadow-lg);
+}
+
+.to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.to-top:hover {
+  border-color: rgba(255, 87, 34, 0.45);
+}
+
+@media (max-width: 560px) {
+  .site-footer .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .site-footer .footer-brand {
+    flex-direction: column;
+  }
+
+  .site-footer .footer-links {
+    justify-content: center;
+  }
+
+  .to-top {
+    inset-inline-start: 14px;
+    bottom: 14px;
+    width: 44px;
+    height: 44px;
+  }
+}

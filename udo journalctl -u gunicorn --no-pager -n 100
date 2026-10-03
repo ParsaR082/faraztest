@@ -1,0 +1,20 @@
+[0;1;32m●[0m gunicorn.service - gunicorn daemon
+     Loaded: loaded (]8;;file://vps-second-235525/etc/systemd/system/gunicorn.service/etc/systemd/system/gunicorn.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;32mactive (running)[0m since Thu 2026-05-14 07:54:30 UTC; 2min 26s ago
+   Main PID: 43957 (gunicorn)
+      Tasks: 4 (limit: 2276)
+     Memory: 100.8M (peak: 101.1M)
+        CPU: 1.558s
+     CGroup: /system.slice/gunicorn.service
+             ├─[0;38;5;245m43957 /var/www/farazbam/venv/bin/python3 /var/www/farazbam/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/var/www/farazbam/gunicorn.sock config.wsgi:application[0m
+             ├─[0;38;5;245m43958 /var/www/farazbam/venv/bin/python3 /var/www/farazbam/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/var/www/farazbam/gunicorn.sock config.wsgi:application[0m
+             ├─[0;38;5;245m43959 /var/www/farazbam/venv/bin/python3 /var/www/farazbam/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/var/www/farazbam/gunicorn.sock config.wsgi:application[0m
+             └─[0;38;5;245m43960 /var/www/farazbam/venv/bin/python3 /var/www/farazbam/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/var/www/farazbam/gunicorn.sock config.wsgi:application[0m
+
+May 14 07:54:30 vps-second-235525 systemd[1]: Started gunicorn.service - gunicorn daemon.
+May 14 07:54:30 vps-second-235525 gunicorn[43957]: [2026-05-14 07:54:30 +0000] [43957] [INFO] Starting gunicorn 23.0.0
+May 14 07:54:30 vps-second-235525 gunicorn[43957]: [2026-05-14 07:54:30 +0000] [43957] [INFO] Listening at: unix:/var/www/farazbam/gunicorn.sock (43957)
+May 14 07:54:30 vps-second-235525 gunicorn[43957]: [2026-05-14 07:54:30 +0000] [43957] [INFO] Using worker: sync
+May 14 07:54:30 vps-second-235525 gunicorn[43958]: [2026-05-14 07:54:30 +0000] [43958] [INFO] Booting worker with pid: 43958
+May 14 07:54:30 vps-second-235525 gunicorn[43959]: [2026-05-14 07:54:30 +0000] [43959] [INFO] Booting worker with pid: 43959
+May 14 07:54:30 vps-second-235525 gunicorn[43960]: [2026-05-14 07:54:30 +0000] [43960] [INFO] Booting worker with pid: 43960

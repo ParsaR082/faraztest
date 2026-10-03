@@ -1,0 +1,172 @@
+/* Anatomy — 3D isometric layers (desktop only) */
+
+#anatomy {
+  min-height: 300vh;
+  position: relative;
+  background: transparent;
+}
+
+#anatomy .sticky-wrapper {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  perspective: 1600px;
+}
+
+#anatomy .anatomy-layout {
+  width: min(100% - 32px, 1200px);
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+}
+
+#anatomy .anatomy-copy .section-title,
+#anatomy .anatomy-copy .section-desc {
+  text-align: start;
+  margin-inline: 0;
+}
+
+#anatomy .anatomy-copy .section-title {
+  margin-bottom: 18px;
+}
+
+#anatomy .anatomy-hints {
+  margin-top: 26px;
+  display: grid;
+  gap: 14px;
+}
+
+#anatomy .hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: var(--surface-glass);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#anatomy .hint b {
+  color: var(--orange);
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+#anatomy .scene-shell {
+  position: relative;
+  min-height: 560px;
+}
+
+#anatomy .scene-3d {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%) rotateX(62deg) rotateZ(-45deg);
+  transform-style: preserve-3d;
+}
+
+#anatomy .layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.35),
+    -12px 12px 40px rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: filter var(--dur-fast) ease;
+  will-change: transform;
+  transform-style: preserve-3d;
+  text-align: center;
+  padding: 20px;
+}
+
+#anatomy .layer:hover {
+  filter: brightness(1.14);
+}
+
+#anatomy .layer-1 {
+  background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+  z-index: 4;
+  color: var(--blue);
+}
+
+#anatomy .layer-2 {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  z-index: 3;
+  color: #fff;
+}
+
+#anatomy .layer-3 {
+  background: linear-gradient(135deg, #f1f5f9, #cbd5e1);
+  z-index: 2;
+  color: var(--blue);
+}
+
+#anatomy .layer-4 {
+  background: linear-gradient(135deg, #0f172a, #000);
+  z-index: 1;
+  color: #fff;
+}
+
+#anatomy .layer span {
+  transform: rotate(45deg);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  max-width: 90%;
+}
+
+#anatomy .layer-info-2d {
+  position: fixed;
+  background: rgba(26, 54, 93, 0.93);
+  padding: 20px 24px;
+  border-radius: var(--radius-md);
+  border-inline-start: 4px solid var(--orange);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  width: min(300px, 90vw);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  z-index: 1001;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(8px);
+}
+
+#anatomy .layer-info-2d.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#anatomy .layer-info-2d strong {
+  display: block;
+  color: var(--orange-soft);
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+@media (max-width: 1023px) {
+  #anatomy {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1200px) {
+  #anatomy .scene-3d {
+    width: 360px;
+    height: 360px;
+  }
+
+  #anatomy .scene-shell {
+    min-height: 520px;
+  }
+}
