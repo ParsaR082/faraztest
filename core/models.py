@@ -13,6 +13,27 @@ class SiteSettings(models.Model):
     about_image = models.ImageField(upload_to='site/', blank=True, null=True, verbose_name="تصویر بخش درباره ما")
     cta_background_image = models.ImageField(upload_to='site/', blank=True, null=True, verbose_name="تصویر پس‌زمینه CTA")
 
+     # تنظیمات SEO
+    seo_title = models.CharField(
+        max_length=255,
+        blank=True,
+        default="فراز بام | ایزوگام و عایق‌کاری تخصصی",
+        verbose_name="عنوان SEO"
+    )
+
+    seo_description = models.TextField(
+        blank=True,
+        default="فراز بام، برند تخصصی ایزوگام و عایق‌کاری رطوبتی با اجرای حرفه‌ای، دوام بالا، مقاومت در برابر گرما و سرما و مشاوره تخصصی پروژه.",
+        verbose_name="توضیحات SEO"
+    )
+
+    seo_og_image = models.ImageField(
+        upload_to='site/seo/',
+        blank=True,
+        null=True,
+        verbose_name="تصویر Open Graph"
+    )
+
     # هیرو
     hero_eyebrow = models.CharField(max_length=120, blank=True, default="برند تخصصی عایق‌کاری رطوبتی", verbose_name="برچسب بالای هیرو")
     hero_brand_name = models.CharField(max_length=80, blank=True, default="فراز بام،", verbose_name="نام برند در عنوان هیرو")

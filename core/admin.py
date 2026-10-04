@@ -22,6 +22,9 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         ("تصاویر سراسری", {
             'fields': ('background_image', 'logo_image', 'about_image', 'cta_background_image'),
         }),
+        ("تنظیمات SEO", {
+            'fields': ('seo_title', 'seo_description', 'seo_og_image'),
+        }),
         ("بخش هیرو", {
             'fields': (
                 'hero_eyebrow', 'hero_brand_name', 'hero_title', 'hero_subtitle', 'hero_description',

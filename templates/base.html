@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta name="description"
-        content="فراز بام، برند تخصصی ایزوگام و عایق‌کاری رطوبتی با اجرای حرفه‌ای، دوام بالا، مقاومت در برابر گرما و سرما و مشاوره تخصصی پروژه." />
+        content="{{ site_settings.seo_description|default:'فراز بام، برند تخصصی ایزوگام و عایق‌کاری رطوبتی با اجرای حرفه‌ای، دوام بالا، مقاومت در برابر گرما و سرما و مشاوره تخصصی پروژه.' }}" />
 
     <link rel="canonical" href="https://farazbamgostar.ir/" />
 
@@ -15,20 +15,34 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fa_IR" />
     <meta property="og:site_name" content="فراز بام" />
-    <meta property="og:title" content="فراز بام | ایزوگام و عایق‌کاری تخصصی" />
+    <meta property="og:title"
+        content="{{ site_settings.seo_title|default:'فراز بام | ایزوگام و عایق‌کاری تخصصی' }}" />
+
     <meta property="og:description"
-        content="فراز بام، برند تخصصی ایزوگام و عایق‌کاری رطوبتی با اجرای حرفه‌ای، دوام بالا، مقاومت در برابر گرما و سرما و مشاوره تخصصی پروژه." />
+        content="{{ site_settings.seo_description|default:'فراز بام، برند تخصصی ایزوگام و عایق‌کاری رطوبتی با اجرای حرفه‌ای، دوام بالا، مقاومت در برابر گرما و سرما و مشاوره تخصصی پروژه.' }}" />
+
     <meta property="og:url" content="https://farazbamgostar.ir/" />
-    <meta property="og:image"
-        content="https://farazbamgostar.ir/static/img/factory_farazbam.webp" />
+
+    {% if site_settings and site_settings.seo_og_image %}
+    <meta property="og:image" content="https://farazbamgostar.ir{{ site_settings.seo_og_image.url }}" />
+    {% else %}
+    <meta property="og:image" content="https://farazbamgostar.ir/static/img/factory_farazbam.webp" />
+    {% endif %}
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="فراز بام | ایزوگام و عایق‌کاری تخصصی" />
+
+    <meta name="twitter:title"
+        content="{{ site_settings.seo_title|default:'فراز بام | ایزوگام و عایق‌کاری تخصصی' }}" />
+
     <meta name="twitter:description"
-        content="فراز بام، برند تخصصی ایزوگام و عایق‌کاری رطوبتی با اجرای حرفه‌ای، دوام بالا، مقاومت در برابر گرما و سرما و مشاوره تخصصی پروژه." />
-    <meta name="twitter:image"
-        content="https://farazbamgostar.ir/static/img/factory_farazbam.webp" />
+        content="{{ site_settings.seo_description|default:'فراز بام، برند تخصصی ایزوگام و عایق‌کاری رطوبتی با اجرای حرفه‌ای، دوام بالا، مقاومت در برابر گرما و سرما و مشاوره تخصصی پروژه.' }}" />
+
+    {% if site_settings and site_settings.seo_og_image %}
+    <meta name="twitter:image" content="https://farazbamgostar.ir{{ site_settings.seo_og_image.url }}" />
+    {% else %}
+    <meta name="twitter:image" content="https://farazbamgostar.ir/static/img/factory_farazbam.webp" />
+    {% endif %}
 
     <meta name="theme-color" content="#2a3f56" />
 
@@ -51,7 +65,7 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
-    <title>فراز بام | ایزوگام و عایق‌کاری تخصصی</title>
+    <title>{{ site_settings.seo_title|default:'فراز بام | ایزوگام و عایق‌کاری تخصصی' }}</title>
 
 
     <!-- Structured Data / Schema.org -->
