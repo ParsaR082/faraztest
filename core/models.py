@@ -17,13 +17,13 @@ class SiteSettings(models.Model):
     seo_title = models.CharField(
         max_length=255,
         blank=True,
-        default="فراز بام | ایزوگام و عایق‌کاری تخصصی",
+        default="ایزوگام ارومیه | تولید و اجرای ایزوگام | فراز بام",
         verbose_name="عنوان SEO"
     )
 
     seo_description = models.TextField(
         blank=True,
-        default="فراز بام، برند تخصصی ایزوگام و عایق‌کاری رطوبتی با اجرای حرفه‌ای، دوام بالا، مقاومت در برابر گرما و سرما و مشاوره تخصصی پروژه.",
+        default="فراز بام، تولیدکننده و مجری ایزوگام در ارومیه؛ ارائه ایزوگام و خدمات عایق‌کاری رطوبتی با کیفیت و اجرای تخصصی برای پروژه‌های ساختمانی.",
         verbose_name="توضیحات SEO"
     )
 
