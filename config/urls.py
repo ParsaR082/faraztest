@@ -23,12 +23,11 @@ def google_verification(request):
 def robots_txt(request):
     return HttpResponse(
         """User-agent: *
-    Allow: /
+Allow: /
 
-    Disallow: /admin/
-    Disallow: /media/
+Disallow: /admin/
 
-    Sitemap: https://farazbamgostar.ir/sitemap.xml
+Sitemap: https://farazbamgostar.ir/sitemap.xml
     """,
         content_type="text/plain",
     )

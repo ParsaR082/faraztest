@@ -468,40 +468,41 @@
 <!-- ===== PROJECTS ===== -->
 <section id="projects" class="section section-projects" dir="rtl">
     <div class="container">
+
         <div class="section-header reveal">
             <div class="eyebrow">{{ site_settings.projects_eyebrow }}</div>
             <h2 class="section-title">{{ site_settings.projects_title }}</h2>
             <p class="section-desc">{{ site_settings.projects_desc }}</p>
         </div>
+
         <div class="projects-grid">
             {% for project in projects %}
             <article class="project-card reveal">
+
                 <div class="project-image">
                     {% if project.image %}
-                    <img src="{{ project.image.url }}" alt="{{ project.title }}" loading="lazy" />
+                    <img src="{{ project.image.url }}"
+                         alt="{{ project.title }}"
+                         loading="lazy" />
                     {% else %}
-                    <img src="{% static 'img/stat-projects.jpg' %}" alt="{{ project.title }}" loading="lazy" onerror="this.src='{% static 'img/factory_farazbam.webp' %}'" />
+                    <img src="{% static 'img/stat-projects.jpg' %}"
+                         alt="{{ project.title }}"
+                         loading="lazy"
+                         onerror="this.src='{% static 'img/factory_farazbam.webp' %}'" />
                     {% endif %}
+
                     <div class="project-image-overlay" aria-hidden="true"></div>
-                    <span class="project-type-badge">{{ project.project_type }}</span>
                 </div>
+
                 <div class="project-body">
                     <h3>{{ project.title }}</h3>
                     <p>{{ project.description }}</p>
-                    <div class="project-meta">
-                        <div class="project-meta-item">
-                            <span class="project-meta-label">سطح اجرا</span>
-                            <span class="project-meta-value">{{ project.surface_type|default:"—" }}</span>
-                        </div>
-                        <div class="project-meta-item">
-                            <span class="project-meta-label">وضعیت</span>
-                            <span class="project-meta-value">{{ project.get_status_display }}</span>
-                        </div>
-                    </div>
                 </div>
+
             </article>
             {% endfor %}
         </div>
+
     </div>
 </section>
 
